@@ -20,9 +20,9 @@ docker compose build
 ### コンテナ内でのコマンド実行
 `compose.yaml`があるディレクトリに移動し，以下のコマンドを実行してください．
 ```sh
-docker compose run --rm -u `id -u`:`id -g` app your_command
+docker compose run --rm -u $UID:$UID app your_command
 
 # 例:Pythonプログラムの実行
-docker compose run --rm -u `id -u`:`id -g` app python src/app_01_chat.py
+docker compose run --rm -u $UID:$UID app python src/app_01_chat.py
 ```
 コマンドを指定しない場合は`bash`が実行されます．
