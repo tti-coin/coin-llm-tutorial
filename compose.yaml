@@ -1,0 +1,27 @@
+name: coin-llm-tutorial  # コンテナ名のプレフィックスになる．プロジェクト名にしておくと良い．
+
+services:
+  app:                                    # サービス名．任意に変更可能．
+    build:
+      context: .                          # Dockerfileがあるディレクトリを指定．
+    image: ${COMPOSE_PROJECT_NAME}.app    # 任意に変更可能．プロジェクト名.サービス名にしておくと識別しやすい．
+    tty: true                             # これを入れておくと，`docker compose run` に `-it`オプションが不要になる．
+    shm_size: '8gb'                       # 共有メモリサイズ．デフォルトでは64MB．不足するなら増やそう．
+    volumes:
+      - .:/workspace                      # このファイルがあるディレクトリを，コンテナ内の`/workspace`で使用可能にする．
+      - ./.home:${HOME}                   # VSCodeのアタッチには，ホームディレクトリが必要．
+    working_dir: /workspace               # コンテナに入ったときのデフォルト作業ディレクトリを指定する．
+    gpus: all                             # コンテナ内でGPUを使用可能にする．
+
+    # コンテナ内で使用する環境変数の定義．APIキーなどはホスト側の`~/.bashrc`でexportしておき，ここで渡すといい．
+    # 【注意】APIキーは絶対に直接入力しないこと！ 誤ってGitHubにアップロードするなど漏洩のリスクがある．
+    environment:
+      - HOME=${HOME}                              # VSCodeのアタッチには，ホームディレクトリが必要．
+      - TERM=xterm-256color                       # (option) ターミナルがカラー表示になる
+      - HF_HOME=/workspace/.cache/huggingface     # DLしたモデルのキャッシュ先．これがないと毎回DLすることになり時間の無駄．
+      # - HF_TOKEN=${HF_TOKEN}
+      # - VLLM_CACHE_ROOT=/workspace/.cache/vllm
+      # - WANDB_API_KEY=${WANDB_API_KEY}
+      # - WANDB_PROJECT=your-project-name
+      # - WANDB_DIR=/workspace/.cache/wandb
+      # - OPENAI_API_KEY=${OPENAI_API_KEY}

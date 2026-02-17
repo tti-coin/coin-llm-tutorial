@@ -1,0 +1,9 @@
+.cache/
+.git/
+.vscode/
+.home/
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
