@@ -23,7 +23,7 @@ DATASET_NAME = "sbintuitions/JCommonsenseQA"
 SEED = 42
 
 
-def main():
+def main(output_dir: str):
     set_seed(SEED)
     wandb.init()
 
@@ -98,7 +98,7 @@ def main():
 
     # 学習の設定
     training_args = SFTConfig(
-        output_dir=OUTPUT_DIR + "/model",
+        output_dir=output_dir + "/model",
         per_device_train_batch_size=1,
         per_device_eval_batch_size=1,
         gradient_accumulation_steps=8,  # batch_size * gradient_accumulation_steps = 実効バッチサイズ
@@ -121,21 +121,21 @@ def main():
 
     # 学習の実行とモデルの保存
     trainer.train()
-    trainer.save_model(OUTPUT_DIR + "/model")
+    trainer.save_model(output_dir + "/model")
 
 
 if __name__ == "__main__":
-    global OUTPUT_DIR
+    output_dir = None
     for _ in range(5):
-        OUTPUT_DIR = f"./outputs/{datetime.now().strftime('%Y-%m-%d/%H-%M-%S')}"
+        output_dir = f"./outputs/{datetime.now().strftime('%Y-%m-%d/%H-%M-%S')}"
         try:
-            os.makedirs(OUTPUT_DIR, exist_ok=False)
-            print(f"OUTPUT_DIR: {OUTPUT_DIR}")
+            os.makedirs(output_dir, exist_ok=False)
+            print(f"output_dir: {output_dir}")
             break
         except FileExistsError:
-            print(f"Output directory already exists: {OUTPUT_DIR}. Retrying...")
+            print(f"Output directory already exists: {output_dir}. Retrying...")
             time.sleep(1)
     else:
         raise RuntimeError("Failed to create a output directory.")
 
-    main()
+    main(output_dir=output_dir)
