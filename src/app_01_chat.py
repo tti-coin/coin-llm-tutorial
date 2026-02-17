@@ -13,7 +13,6 @@ def main():
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_NAME_OR_PATH,
         device_map="auto",
-        use_cache=False,
     )
     model.eval()
 
