@@ -19,9 +19,7 @@ services:
       - HOME=${HOME}                              # VSCodeのアタッチには，ホームディレクトリが必要．
       - TERM=xterm-256color                       # (option) ターミナルがカラー表示になる
       - HF_HOME=/workspace/.cache/huggingface     # DLしたモデルのキャッシュ先．これがないと毎回DLすることになり時間の無駄．
-      # - HF_TOKEN=${HF_TOKEN}
-      # - VLLM_CACHE_ROOT=/workspace/.cache/vllm
-      # - WANDB_API_KEY=${WANDB_API_KEY}
-      # - WANDB_PROJECT=your-project-name
-      # - WANDB_DIR=/workspace/.cache/wandb
-      # - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - HF_TOKEN=${HF_TOKEN}
+      - WANDB_PROJECT=${COMPOSE_PROJECT_NAME}
+      - WANDB_DIR=/workspace/.cache/wandb
+      - WANDB_API_KEY=${WANDB_API_KEY}

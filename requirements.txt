@@ -1,2 +1,6 @@
-transformers
-accelerate
+transformers==5.1.0
+accelerate==1.12.0
+datasets==4.5.0
+peft==0.18.1
+trl==0.28.0
+wandb

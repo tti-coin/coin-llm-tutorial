@@ -3,7 +3,7 @@ from transformers import (
     AutoTokenizer,
 )
 
-MODEL_NAME_OR_PATH = "SakanaAI/TinySwallow-1.5B-Instruct"
+MODEL_NAME_OR_PATH = "llm-jp/llm-jp-3-980m-instruct2"
 
 
 def main():
@@ -47,7 +47,7 @@ def main():
             attention_mask=inputs["attention_mask"],
             max_new_tokens=1024,
             pad_token_id=tokenizer.eos_token_id,
-            do_sample=True,
+            do_sample=False,
             num_beams=1,
         )
         response = tokenizer.decode(

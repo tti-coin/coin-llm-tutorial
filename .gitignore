@@ -1,6 +1,7 @@
 .cache/
 .vscode/
 .home/
+outputs/
 
 
 __pycache__/
