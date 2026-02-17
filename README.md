@@ -15,7 +15,7 @@ Forkできたら，そのリポジトリを自分の環境にCloneしてくだ�
 ```sh
 docker compose build
 ```
-`coin-llm-tutorial.app`イメージができていれば成功です．
+アプリ用のDockerイメージがビルドされていれば成功です（イメージ名は `compose.yaml` の設定に依存します）．
 
 ### コンテナ内でのコマンド実行
 `compose.yaml`があるディレクトリに移動し，以下のコマンドを実行してください．
