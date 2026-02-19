@@ -19,6 +19,7 @@ services:
       - TERM=xterm-256color                       # (option) ターミナルがカラー表示になる
       - HF_HOME=/workspace/.cache/huggingface     # DLしたモデルのキャッシュ先．これがないと毎回DLすることになり時間の無駄．
       - HF_TOKEN=${HF_TOKEN}
+      - TORCHINDUCTOR_CACHE_DIR=/workspace/.cache/torchinductor
       - WANDB_PROJECT=${COMPOSE_PROJECT_NAME}
       - WANDB_DIR=/workspace/.cache/wandb
       - WANDB_API_KEY=${WANDB_API_KEY}
