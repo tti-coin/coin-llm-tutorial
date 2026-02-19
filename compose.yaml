@@ -11,7 +11,6 @@ services:
       - .:/workspace                      # このファイルがあるディレクトリを，コンテナ内の`/workspace`で使用可能にする．
       - ./.home:${HOME}                   # VSCodeのアタッチには，ホームディレクトリが必要．
     working_dir: /workspace               # コンテナに入ったときのデフォルト作業ディレクトリを指定する．
-    gpus: all                             # コンテナ内でGPUを使用可能にする．
 
     # コンテナ内で使用する環境変数の定義．APIキーなどはホスト側の`~/.bashrc`でexportしておき，ここで渡すといい．
     # 【注意】APIキーは絶対に直接入力しないこと！ 誤ってGitHubにアップロードするなど漏洩のリスクがある．
@@ -23,3 +22,12 @@ services:
       - WANDB_PROJECT=${COMPOSE_PROJECT_NAME}
       - WANDB_DIR=/workspace/.cache/wandb
       - WANDB_API_KEY=${WANDB_API_KEY}
+
+    # コンテナ内でGPUを使用可能にする．
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
