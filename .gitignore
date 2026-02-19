@@ -1,6 +1,7 @@
 .cache/
 .vscode/
-.home/
+.home/*
+!.home/README.md
 outputs/
 
 
